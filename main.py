@@ -112,10 +112,37 @@ class Solution:
             arr.append(arr[i] + nums[i + 1])
         return arr
             
- arr = []
-        left = 0
-        for i in range(len(nums)):
-            if sum(nums[i + left: i+3]) == 0:
-                arr.append(nums[i + left : i+3])
-            left += 1
-        return arr
+
+
+#Given an integer x, return true if x is a palindrome , and false otherwise.
+
+#My solution
+    class Solution:
+        def isPalindrome(self, x: int) -> bool:
+            return str(x) == str(x)[::-1]
+# Optimal but worse space complexity
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0:
+            return False
+        rev = 0
+        orig = x
+        while x != 0:
+            rev = rev * 10 + x % 10
+            x //= 10
+        return rev == orig
+    
+# Contains Duplicate
+class Solution(object):
+    def containsDuplicate(self, nums):
+        #Creating a data structure to store each element in array we scan through
+        hash_table = {}
+        #Going through each element in array
+        for p in range(len(nums)):
+            #If the current element is not in a data structure we created yet then append current element else we know that array is duplicated
+            if hash_table.get(nums[p]):
+                return True
+            else:
+                hash_table[nums[p]] = True
+        return False
+# TC O(n) SC O(n)
